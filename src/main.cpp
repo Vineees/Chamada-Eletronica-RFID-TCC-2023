@@ -1,13 +1,26 @@
 #include <Arduino.h>
+
+//RFID-RC522 DEPS
+#include <MFRC522.h> 
 #include <SPI.h>
-#include <MFRC522.h> //INCLUSÃO DE BIBLIOTECA
- 
+
+//HTTP Requests Deps
+#include <WiFi.h>
+#include <HTTPClient.h>
+
+//Variáveis
 #define SS_PIN  5  // ESP32 pin GPIO5 
 #define RST_PIN 27 // ESP32 pin GPIO27
 #define ledgreen 16
 #define ledred 17
 
-#define espmode 2
+//Wifi PASSWD and SSID
+const char* ssid = "Bocaberta";
+const char* password = "total123**";
+
+String serverName = "http://192.168.1.106:1880/update-sensor";
+
+#define espmode  1 // 2 = SHOW CARD HEX | 1 = NORMAL MODE
 
 byte authorizedUID[4] = {0xA6, 0x73, 0x0B, 0xF8};
 MFRC522 rfid(SS_PIN, RST_PIN);
